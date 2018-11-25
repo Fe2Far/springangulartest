@@ -1,0 +1,91 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style type="text/css">
+	button {
+		width: 80px;
+	}
+	
+	input {
+		width: 100%;
+	}
+</style>
+
+<div>
+	<h2>Cadastro de Limites de Crédito</h2>
+	
+	
+	<div>
+		
+		<label for="nomeCliente">Cliente:</label>
+		<input type="text" ng-model="credito.nomeCliente" class="form-control" id="nomeCliente"" placeholder="Nome do Cliente" required="required" />
+		
+		<label for="limiteCredito">Limite Crédito :</label>
+		<input type="number" ng-model="credito.limiteCredito" class="form-control" id="limiteCredito"" placeholder="Limite de Credito"  style="display:inline-block" required="required" />
+		 
+         <div  class="form-group">
+             <label>Tipo Risco</label>
+             <select 
+             class="form-control"
+             ng-model="credito.tipoRisco.idTipoRisco"
+             ng-change="GetValue(credito.tipoRisco.idTipoRisco)"
+             ng-options="tipoRisco.idTipoRisco as tipoRisco.descricao for tipoRisco in lista_tiposrisco.availableOptions track by tipoRisco.idTipoRisco" ></select>
+         </div>
+
+		<label for="taxaJurosInformado">Taxa Juros:</label>
+		<input type="number" ng-model="credito.taxaJurosInformado" class="form-control" id="taxaJurosInformado" placeholder="Taxa de Juros apenas para Risco A" />
+	
+	</div>
+	
+	<br/>
+	
+	<div>
+		<button class="btn btn-primary" ng-click="novo();">Novo</button>
+		<button class="btn btn-primary" ng-click="salvar();">Salvar</button>
+	</div>
+	
+	<br/>
+	
+	
+	
+	<br/>
+	
+	<div class="table-responsive">
+	
+		<table class="table table-striped table-hover table-bordered table-condensed">
+			<tr>
+				<th style="cursor: pointer" ng-click="orderByMe('idCreditoCliente')">Identificador</th>
+				<th style="cursor: pointer" ng-click="orderByMe('nomeCliente')">Nome Cliente</th>
+				<th>Limite Crédito</th>
+				<th>Tipo Risco</th>
+				<th>Taxa Juros</th>
+				<th>Taxa Informado</th>
+				<th>Excluir</th>
+			</tr>
+			
+			<tr ng-repeat="credito in creditos | orderBy:myOrderBy | filter:filtro">
+				<td>{{credito.idCreditoCliente}}</td>
+				<td>{{credito.nomeCliente}}</td>
+				<td>{{credito.limiteCredito}}</td>
+				<td>{{credito.tipoRisco.descricao}}</td>
+				<td>{{credito.tipoRisco.taxaJuros}}</td>
+				<td>{{credito.taxaJurosInformado}}</td>
+				<td><button ng-click="excluir(credito);">Excluir</button></td>
+			</tr>
+		
+		
+		</table>
+		
+		<div>
+			<label for="filtro">Buscar: </label>
+			<input type="text" ng-model="filtro" class="form-control" id="filtro"/>
+		</div>
+		
+		<br/>
+	
+	</div>
+	
+	
+	
+
+
+</div>
