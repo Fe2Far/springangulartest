@@ -1,1 +1,24 @@
 
+PROJETO PARA TESTE
+
+- Projeto deve ser executado em base mysqlserver
+- Base e carga inicial já será realizada no start da aplicação ( base zagworktestbd )
+- Usuário root, Senha padrão admin para base mysql...necessário alterar no arquivo application.properties.
+
+
+Entrar no link Creditos;
+
+O sistema conta com 3 campos para cadastro
+
+Nome do Cliente   - text
+Limite de Crédito - number
+Tipo de Risco     - [A,B,C]
+Taxa de Juros Informada - No caso dos tipos B e C automaticamente será preenchido o campo como 10 e 20 respectivamente. No caso do tipo A será necessário o preenchimento.
+
+Abaixo será mostrada os dados persistidos, com nome do cliente, taxa de juros do tipo Risco e informado.
+
+Opção excluir também foi implementada.
+
+
+Felipe Almeida
+
