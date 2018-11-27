@@ -12,33 +12,29 @@ creditoApp.controller("CreditoController", function($scope, $http) {
 
 	
 	$scope.GetValue = function (obj) {
-		//alert(obj);
-		if(obj == 1){
-			$scope.credito.taxaJurosInformado = '0';
-			document.getElementById("taxaJurosInformado").value='0';
-			document.getElementById("taxaJurosInformado").readOnly=false;
-		} else if (obj == 2){
-			$scope.credito.taxaJurosInformado = '10';
-			document.getElementById("taxaJurosInformado").value='10';
-			document.getElementById("taxaJurosInformado").readOnly=true;
-		} else if (obj == 3){
-			$scope.credito.taxaJurosInformado = '20';
-			document.getElementById("taxaJurosInformado").value='20';
-			document.getElementById("taxaJurosInformado").readOnly=true;
-		} else {
-			$scope.credito.taxaJurosInformado = '0';
-			document.getElementById("taxaJurosInformado").value='0';
-			document.getElementById("taxaJurosInformado").readOnly=false;
-		}
+		
+		$http.get(urlBase + "/tiposRisco/" + obj).then(function (resposta) {
 			
+			var taxaJuros = resposta.data.taxaJuros;
+			
+			if(taxaJuros == null || taxaJuros==undefined){
+				document.getElementById("taxaJurosInformado").value='0';
+				document.getElementById("taxaJurosInformado").readOnly=false;
+			} else {
+				document.getElementById("taxaJurosInformado").readOnly=true;
+				document.getElementById("taxaJurosInformado").value=taxaJuros;
+				$scope.credito.taxaJurosInformado = taxaJuros;
+			}
+		});
     }
 	
 	$scope.novo = function() {
 		$scope.credito.idCreditoCliente = null;
 		$scope.credito.nomeCliente = null;
 		$scope.credito.limiteCredito = null;
+		$scope.credito.taxaJurosInformado = null;
 		$scope.credito.tipoRisco.idTipoRisco = null;
-		document.getElementById("taxaJurosInformado").value='0';
+		$scope.credito.taxaJurosInformado = null;
 	}
 	
 	
