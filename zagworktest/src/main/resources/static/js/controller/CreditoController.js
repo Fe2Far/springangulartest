@@ -12,10 +12,11 @@ creditoApp.controller("CreditoController", function($scope, $http) {
 
 	
 	$scope.GetValue = function (obj) {
-		//sorry about that =(;
+		//alert(obj);
 		if(obj == 1){
 			$scope.credito.taxaJurosInformado = '0';
 			document.getElementById("taxaJurosInformado").value='0';
+			document.getElementById("taxaJurosInformado").readOnly=false;
 		} else if (obj == 2){
 			$scope.credito.taxaJurosInformado = '10';
 			document.getElementById("taxaJurosInformado").value='10';
@@ -27,12 +28,16 @@ creditoApp.controller("CreditoController", function($scope, $http) {
 		} else {
 			$scope.credito.taxaJurosInformado = '0';
 			document.getElementById("taxaJurosInformado").value='0';
+			document.getElementById("taxaJurosInformado").readOnly=false;
 		}
 			
     }
 	
 	$scope.novo = function() {
-		$scope.credito = "";
+		$scope.credito.idCreditoCliente = null;
+		$scope.credito.nomeCliente = null;
+		$scope.credito.limiteCredito = null;
+		$scope.credito.tipoRisco.idTipoRisco = null;
 		document.getElementById("taxaJurosInformado").value='0';
 	}
 	
@@ -71,7 +76,7 @@ creditoApp.controller("CreditoController", function($scope, $http) {
 	
     $scope.salvar = function() {
     	$http.post(urlBase  + "/creditos", $scope.credito ).then(function(response){ 
-			$scope.listar();
+    		$scope.listar();
 			$scope.novo();
 		}, function(response){
 			window.alert("Erro Post!");
